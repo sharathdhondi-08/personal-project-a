@@ -1,0 +1,26 @@
+name: Secure DevSecOps Deployment Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  security-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Application using Secure Injection
+        # We explicitly link GitHub's Encrypted Secrets to Runtime Environment Variables
+        env:
+          DB_URL: ${{ secrets.PROD_DB_URL }}
+          API_KEY: ${{ secrets.PROD_API_KEY }}
+        run: |
+          node app.js
+
