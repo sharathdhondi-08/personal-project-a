@@ -1,4 +1,6 @@
-// SECURE: App looks into the operating system RAM for values at runtime
+// SECURE: Initialize the dotenv manager to read our local file
+require('dotenv').config(); 
+
 const DATABASE_URL = process.env.DB_URL;
 const PAYMENT_API_KEY = process.env.API_KEY;
 
